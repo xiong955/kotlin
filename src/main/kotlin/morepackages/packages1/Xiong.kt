@@ -10,4 +10,8 @@ package morepackages.packages1
     init {
         println("输出了$mString")
     }
+
+    override fun toString(): String {
+        return mString
+    }
 }
