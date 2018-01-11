@@ -1,5 +1,7 @@
 package generic
 
+import array.arrayInt
+
 /**
  * @author: xiong
  * @time: 2018/01/04
@@ -9,32 +11,42 @@ package generic
  *     in泛型占位符,只能被用作方法的参数,被操作,而不能作为返回值,T也称作 逆变类型参数。                           消费者
  */
 
-class Box<T>(t:T){
+class Box<T>(t: T) {
     var value = t
 }
 
 fun main(args: Array<String>) {
-    var box1:Box<Int> = Box(20)
-    var box2:Box<String> = Box("10")
+    var box1: Box<Int> = Box(20)
+    var box2: Box<String> = Box("10")
     println(box1.value)
     println(box2.value)
+    val from:Array<Int> = arrayOf(1,2,3)
+    val to:Array<Any> = arrayOf(3)
+    copy(from,to)
 }
 
-abstract class Source<out T>{
-    abstract fun nextT():T
+abstract class Source<out T> {
+    abstract fun nextT(): T
 }
 
-fun demo(str:Source<String>){
-    val objects : Source<Any> = str
+fun demo(str: Source<String>) {
+    val objects: Source<Any> = str
 }
 
-abstract class Comparable<in T>{
+abstract class Comparable<in T> {
     // T被声明为in类型,所以不能为T
-    abstract fun comparableTo(other :T):Int
+    abstract fun comparableTo(other: T): Int
 }
 
-fun demo(x:Comparable<Number>){
+fun demo(x: Comparable<Number>) {
     // 1.0是Double类型,Double是Number的子类
     x.comparableTo(1.0)
-    val y : Comparable<Double> = x
+    val y: Comparable<Double> = x
+}
+
+fun copy(from: Array<out Any>, to: Array<Any>) {
+    assert(from.size == to.size)
+    for (i in from.indices) {
+        to[i] = from[i]
+    }
 }
