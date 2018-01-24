@@ -1,6 +1,7 @@
 package generic
 
 import array.arrayInt
+import java.util.*
 
 /**
  * @author: xiong
@@ -20,9 +21,13 @@ fun main(args: Array<String>) {
     var box2: Box<String> = Box("10")
     println(box1.value)
     println(box2.value)
-    val from:Array<Int> = arrayOf(1,2,3)
-    val to:Array<Any> = arrayOf(3)
-    copy(from,to)
+    val from: Array<Int> = arrayOf(1, 2, 3)
+    val to: Array<Any?> = arrayOfNulls(5)
+    copy(from, to)
+
+    TestTTT("1")
+    TestTTT(1)
+    TestTTT(Box(20))
 }
 
 abstract class Source<out T> {
@@ -44,9 +49,19 @@ fun demo(x: Comparable<Number>) {
     val y: Comparable<Double> = x
 }
 
-fun copy(from: Array<out Any>, to: Array<Any>) {
+fun copy(from: Array<out Any>, to: Array<Any?>) {
     assert(from.size == to.size)
     for (i in from.indices) {
         to[i] = from[i]
+    }
+}
+
+//类型参数放在函数名称之前。
+//如果在调用处明确地传入了类型参数, 那么类型参数应该放在函数名称 之后。如果不传入参数类型，编译器会根据传入的值自动推断参数类型。
+fun <T> TestTTT(i:T){
+    when(i){
+        is Int -> println("is int")
+        is String -> println("is string")
+        else -> println("T is ???")
     }
 }

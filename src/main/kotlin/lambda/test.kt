@@ -45,5 +45,8 @@ fun main(args: Array<String>) {
     processProduct(product) { name ->
         "$name 美国"
     }
+    processProduct(product) {
+        "$it 美国"
+    }
     println(product)
 }
