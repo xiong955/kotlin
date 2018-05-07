@@ -16,4 +16,7 @@ fun main(args: Array<String>) {
 fun testJsoup() {
     val doc = Jsoup.parse(URL("http://www.wandoujia.com/apps"), 5000)
     doc.select(".name").forEach { println(it) }
+
+
+    print("1")
 }
