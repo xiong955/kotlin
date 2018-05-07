@@ -1,8 +1,5 @@
 package generic
 
-import array.arrayInt
-import java.util.*
-
 /**
  * @author: xiong
  * @time: 2018/01/04
